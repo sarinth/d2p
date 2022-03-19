@@ -1,8 +1,7 @@
 // ==UserScript==
-// @id             iitc-plugin-s2cells
-// @name           IITC plugin: Show s2 level 6, 14, 17, 19 cells with different colors
-// @author         sarinth
-// @category       Layer
+// @id             iitc-plugin-distance-to-portal@jonatkins
+// @name           IITC plugin: Distance to portal
+// @category       Portal Info
 // @version        0.1.1.20210220
 // @namespace      https://github.com/sarinth/d2p
 // @updateURL      https://raw.githubusercontent.com/sarinth/s2/master/distance-to-portal.meta.js
