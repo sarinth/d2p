@@ -2,7 +2,7 @@
 // @id             iitc-plugin-distance-to-portal@jonatkins
 // @name           IITC plugin: Distance to portal
 // @category       Portal Info
-// @version        0.1.1.20210220
+// @version        0.2.1.20220319
 // @namespace      https://github.com/sarinth/d2p
 // @updateURL      https://raw.githubusercontent.com/sarinth/s2/master/distance-to-portal.meta.js
 // @downloadURL    https://raw.githubusercontent.com/sarinth/s2/master/distance-to-portal.user.js
