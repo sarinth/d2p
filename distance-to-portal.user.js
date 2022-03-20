@@ -1,8 +1,10 @@
 // ==UserScript==
+// @name           Distance to portal
 // @id             iitc-plugin-distance-to-portal@jonatkins
-// @name           IITC plugin: Distance to portal
+// @author         jonatkins, mods by sarinth
 // @category       Portal Info
-// @version        0.1.1.20210220
+// @version        0.2.0.20220319
+// @description    Allows your current location to be set manually, then shows the distance to the selected portal. Useful when managing portal keys.
 // @namespace      https://github.com/sarinth/d2p
 // @updateURL      https://raw.githubusercontent.com/sarinth/s2/master/distance-to-portal.meta.js
 // @downloadURL    https://raw.githubusercontent.com/sarinth/s2/master/distance-to-portal.user.js
@@ -18,7 +20,6 @@
 // @grant          none
 // ==/UserScript==
 
-
 function wrapper(plugin_info) {
 // ensure plugin framework is there, even if iitc is not yet loaded
 if(typeof window.plugin !== 'function') window.plugin = function() {};
@@ -31,9 +32,7 @@ if(typeof window.plugin !== 'function') window.plugin = function() {};
 //END PLUGIN AUTHORS NOTE
 
 
-
 // PLUGIN START ////////////////////////////////////////////////////////
-
 
 // use own namespace for plugin
 window.plugin.distanceToPortal = function() {};
@@ -73,8 +72,8 @@ window.plugin.distanceToPortal.updateDistance = function() {
   var text;
 
   if (window.plugin.distanceToPortal.currentLoc) {
-    var cll = window.plugin.distanceToPortal.currentLoc;
-    var dist = window.plugin.distanceToPortal.currentLoc.distanceTo(ll);
+   var cll = window.plugin.distanceToPortal.currentLoc;
+   var dist = window.plugin.distanceToPortal.currentLoc.distanceTo(ll);
 
     dist = window.plugin.distanceToPortal.formatDistance(dist);
 
@@ -108,11 +107,15 @@ window.plugin.distanceToPortal.setLocation = function() {
   }
 
 
-//  if (!window.plugin.distanceToPortal.currentLoc) {
+ // if (!window.plugin.distanceToPortal.currentLoc) {
     window.plugin.distanceToPortal.currentLoc = map.getCenter();
-//  }
+ // }
 
-  window.plugin.distanceToPortal.currentLocMarker = createGenericMarker (window.plugin.distanceToPortal.currentLoc,'#444',{draggable:true});
+  window.plugin.distanceToPortal.currentLocMarker = L.marker(window.plugin.distanceToPortal.currentLoc, {
+    icon: L.divIcon.coloredSvg('#444'),
+    draggable: true,
+    title: 'Drag to change current location'
+  });
 
   window.plugin.distanceToPortal.currentLocMarker.on('drag', function(e) {
     window.plugin.distanceToPortal.currentLoc = window.plugin.distanceToPortal.currentLocMarker.getLatLng();
@@ -126,8 +129,6 @@ window.plugin.distanceToPortal.setLocation = function() {
 };
 
 window.plugin.distanceToPortal.setupPortalsList = function() {
-  if(!window.plugin.portalslist) return;
-
   window.plugin.portalslist.fields.push({
     title: "Dist",
     value: function(portal) { if (window.plugin.distanceToPortal.currentLoc) return window.plugin.distanceToPortal.currentLoc.distanceTo(portal.getLatLng()); else return 0; },
@@ -149,7 +150,7 @@ window.plugin.distanceToPortal.setup  = function() {
  *     var whichway = here.bearingWordTo(there);
  *     var howfar   = (here.distanceTo(there) / 1609.34).toFixed(2);
  *     alert("San Francisco is " + howfar + " miles, to the " + whichway );
- * 
+ *
  * Greg Allensworth   <greg.allensworth@gmail.com>
  * No license, use as you will, kudos welcome but not required, etc.
  */
@@ -183,8 +184,6 @@ L.LatLng.prototype.bearingWordTo = function(other) {
     return bearingword;
 };
 
-
-
   try {
     window.plugin.distanceToPortal.currentLoc = L.latLng(JSON.parse(localStorage['plugin-distance-to-portal']));
   } catch(e) {
@@ -197,8 +196,9 @@ L.LatLng.prototype.bearingWordTo = function(other) {
 
   addHook('portalDetailsUpdated', window.plugin.distanceToPortal.addDistance);
 
-  window.plugin.distanceToPortal.setupPortalsList();
-
+  if (window.plugin.portalslist) {
+    window.plugin.distanceToPortal.setupPortalsList();
+  }
 };
 
 var setup =  window.plugin.distanceToPortal.setup;
