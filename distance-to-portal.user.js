@@ -3,20 +3,13 @@
 // @id             iitc-plugin-distance-to-portal@jonatkins
 // @author         jonatkins, mods by sarinth
 // @category       Portal Info
-// @version        0.2.0.20220319
-// @description    Allows your current location to be set manually, then shows the distance to the selected portal. Useful when managing portal keys.
+// @version        0.2.1.20230501
 // @namespace      https://github.com/sarinth/d2p
 // @updateURL      https://raw.githubusercontent.com/sarinth/s2/master/distance-to-portal.meta.js
 // @downloadURL    https://raw.githubusercontent.com/sarinth/s2/master/distance-to-portal.user.js
 // @description    IITC: Allows your current location to be set manually, then shows the distance to the selected portal. Useful when managing portal keys.
-// @include        https://*.ingress.com/intel*
-// @include        http://*.ingress.com/intel*
-// @match          https://*.ingress.com/intel*
-// @match          http://*.ingress.com/intel*
-// @include        https://*.ingress.com/mission/*
-// @include        http://*.ingress.com/mission/*
-// @match          https://*.ingress.com/mission/*
-// @match          http://*.ingress.com/mission/*
+// @match          https://*.ingress.com/*
+// @match          http://*.ingress.com/*
 // @grant          none
 // ==/UserScript==
 
